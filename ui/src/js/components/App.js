@@ -1,7 +1,12 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
+
+console.log(Button, 'button');
 
 const App = () => (
-    <div>{"Hello World!"}</div>
+    <div>
+        <Button bsStyle="info">Info</Button>
+    </div>
 );
 
 export default App;
