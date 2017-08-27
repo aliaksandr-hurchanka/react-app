@@ -23,7 +23,12 @@ const initialState = {
     items: [],
     activePage: 1,
     size: 4,
-    totalItems: items.length
+    totalItems: items.length,
+    filters: {
+        author: '',
+        genre: '',
+        year: ''
+    }
 }
 
 export default (state = initialState, action) => {
