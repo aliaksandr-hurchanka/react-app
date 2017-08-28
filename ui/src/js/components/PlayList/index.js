@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as pageActions from './../../actions';
+import * as pageActions from './../../actions/playlist';
 import { Table, Pagination } from 'react-bootstrap';
 
 import { map } from 'lodash';
@@ -79,4 +79,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlayList)
+export default connect(mapStateToProps, mapDispatchToProps)(PlayList);

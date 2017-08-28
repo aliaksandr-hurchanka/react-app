@@ -1,36 +1,70 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as pageActions from './../../actions/filters';
 import { FormGroup, DropdownButton, MenuItem, Label } from 'react-bootstrap';
+import { map } from 'lodash';
 
-const Filters = () => (
-    <div>
-        <FormGroup>
-            <Label>Author</Label>
-            <DropdownButton bsSize="small" title={"Default"} id={"dropdown"}>
-                <MenuItem eventKey="1">Name1</MenuItem>
-                <MenuItem eventKey="2">Name2</MenuItem>
-                <MenuItem eventKey="3">Name3</MenuItem>
-                <MenuItem eventKey="4">Name4</MenuItem>
-            </DropdownButton>
-        </FormGroup>
-        <FormGroup>
-            <Label>Genre</Label>
-            <DropdownButton bsSize="small" title={"Default"} id={"dropdown"}>
-                <MenuItem eventKey="1">Name1</MenuItem>
-                <MenuItem eventKey="2">Name2</MenuItem>
-                <MenuItem eventKey="3">Name3</MenuItem>
-                <MenuItem eventKey="4">Name4</MenuItem>
-            </DropdownButton>
-        </FormGroup>
-        <FormGroup>
-            <Label>Year</Label>
-            <DropdownButton bsSize="small" title={"Default"} id={"dropdown"}>
-                <MenuItem eventKey="1">Name1</MenuItem>
-                <MenuItem eventKey="2">Name2</MenuItem>
-                <MenuItem eventKey="3">Name3</MenuItem>
-                <MenuItem eventKey="4">Name4</MenuItem>
-            </DropdownButton>
-        </FormGroup>
-    </div>
-);
+class Filters extends Component {
+    constructor(props) {
+        super(props);
 
-export default Filters;
+        this.onChangeFilter = this.onChangeFilter.bind(this);
+    }
+    componentDidMount() {
+        this.props.pageActions.getAvailableFilters();
+    }
+    onChangeFilter(type, value) {
+        console.log(this.props);
+        this.props.pageActions.changeFilter({ type, value });
+    }
+    render() {
+
+        const { filters } = this.props;
+
+        return (
+            <div>
+                <FormGroup>
+                    {
+                        map(filters, (filter, key) => (
+                            <div key={key}>
+                                <Label>{key}</Label>
+                                <DropdownButton
+                                    bsSize="small"
+                                    title={"Select"}
+                                    id={key}
+                                >
+                                    {
+                                        map(filter, (item, i) => (
+                                            <MenuItem
+                                                eventKey={i}
+                                                key={i}
+                                                onSelect={() => this.onChangeFilter(key, item)}
+                                            >
+                                                {item}
+                                            </MenuItem>
+                                        ))
+                                    }
+                                </DropdownButton>
+                            </div>
+                        ))
+                    }
+                </FormGroup>
+            </div>
+        );
+    }
+};
+
+function mapStateToProps(state) {
+    return {
+        filters: state.filters
+    };
+}
+  
+function mapDispatchToProps(dispatch) {
+    return {
+        pageActions: bindActionCreators(pageActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filters);

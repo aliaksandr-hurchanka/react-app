@@ -18,6 +18,11 @@ const items = [
     {id: '13', author: 'name13', song: 'song13', genre: 'genre13', year: '2017'},
     {id: '14', author: 'name14', song: 'song14', genre: 'genre14', year: '2017'}
 ];
+const availableFilters = {
+    author: ['name3', 'name5'],
+    genre: ['genre1', 'genre4'],
+    year: ['2009', '2015']
+}
 
 const initialState = {
     items: [],
@@ -40,6 +45,11 @@ export default (state = initialState, action) => {
             return update(state, {
                 items: { $set: slice(items, from, to) },
                 totalItems: { $set: items.length }
+            });
+        }
+        case "GET_AVAILABLE_FILTERS": {
+            return update(state, {
+                filters: { $set: availableFilters }
             });
         }
         case "CHANGE_ACTIVE_PAGE": {
