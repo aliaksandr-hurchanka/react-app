@@ -15,23 +15,22 @@ class Filters extends Component {
         this.props.pageActions.getAvailableFilters();
     }
     onChangeFilter(type, value) {
-        console.log(this.props);
         this.props.pageActions.changeFilter({ type, value });
     }
     render() {
 
-        const { filters } = this.props;
+        const { availableFilters, activeFilters } = this.props;
 
         return (
             <div>
                 <FormGroup>
                     {
-                        map(filters, (filter, key) => (
+                        map(availableFilters, (filter, key) => (
                             <div key={key}>
                                 <Label>{key}</Label>
                                 <DropdownButton
                                     bsSize="small"
-                                    title={"Select"}
+                                    title={activeFilters[key] || "Select"}
                                     id={key}
                                 >
                                     {
@@ -41,7 +40,7 @@ class Filters extends Component {
                                                 key={i}
                                                 onSelect={() => this.onChangeFilter(key, item)}
                                             >
-                                                {item}
+                                                {item || "Select"}
                                             </MenuItem>
                                         ))
                                     }
@@ -57,7 +56,8 @@ class Filters extends Component {
 
 function mapStateToProps(state) {
     return {
-        filters: state.filters
+        availableFilters: state.availableFilters,
+        activeFilters: state.activeFilters
     };
 }
   
