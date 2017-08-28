@@ -12,11 +12,11 @@ const items = [
     {id: '7', author: 'name3', song: 'song7', genre: 'genre7', year: '2017'},
     {id: '8', author: 'name8', song: 'song8', genre: 'genre8', year: '2017'},
     {id: '9', author: 'name5', song: 'song9', genre: 'genre9', year: '2017'},
-    {id: '10', author: 'name5', song: 'song10', genre: 'genre10', year: '2017'},
-    {id: '11', author: 'name5', song: 'song11', genre: 'genre11', year: '2017'},
-    {id: '12', author: 'name12', song: 'song12', genre: 'genre12', year: '2017'},
-    {id: '13', author: 'name13', song: 'song13', genre: 'genre13', year: '2017'},
-    {id: '14', author: 'name14', song: 'song14', genre: 'genre14', year: '2017'}
+    {id: '10', author: 'name5', song: 'song10', genre: 'genre1', year: '2017'},
+    {id: '11', author: 'name5', song: 'song11', genre: 'genre1', year: '2017'},
+    {id: '12', author: 'name12', song: 'song12', genre: 'genre1', year: '2017'},
+    {id: '13', author: 'name13', song: 'song13', genre: 'genre1', year: '2017'},
+    {id: '14', author: 'name14', song: 'song14', genre: 'genre1', year: '2017'}
 ];
 const availableFilters = {
     author: [null, 'name3', 'name5'],
@@ -60,10 +60,11 @@ export default (state = initialState, action) => {
         case "CHANGE_ACTIVE_PAGE": {
             
             const { from, to } = getInterval(action.payload.page, state.size, state.totalItems);
+            const filteredItems = getFilteredItems(items, state.activeFilters);
 
             return update(state, {
                 activePage: { $set: action.payload.page },
-                items: { $set: slice(items, from, to) }
+                items: { $set: slice(filteredItems, from, to) }
             });
         }
         case "CHANGE_FILTER": {
@@ -71,10 +72,11 @@ export default (state = initialState, action) => {
             const { type, value } = action.payload;
             const activeFilters = assign({}, state.activeFilters, { [type]: value });
             const filteredItems = getFilteredItems(items, activeFilters);
+            const { from, to } = getInterval(state.activePage, state.size, filteredItems.length);
 
             return update(state, {
                 activeFilters: { $set: activeFilters },
-                items: { $set: filteredItems },
+                items: { $set: slice(filteredItems, from, to) },
                 totalItems: { $set: filteredItems.length }
             });
         }
