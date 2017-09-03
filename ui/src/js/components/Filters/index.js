@@ -22,7 +22,7 @@ class Filters extends Component {
         const { availableFilters, activeFilters } = this.props;
 
         return (
-            <div>
+            <div className="filters">
                 <FormGroup>
                     {
                         map(availableFilters, (filter, key) => (
@@ -60,7 +60,7 @@ function mapStateToProps(state) {
         activeFilters: state.activeFilters
     };
 }
-  
+
 function mapDispatchToProps(dispatch) {
     return {
         pageActions: bindActionCreators(pageActions, dispatch)

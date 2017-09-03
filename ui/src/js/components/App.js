@@ -6,10 +6,10 @@ import { Col, Row } from 'react-bootstrap';
 const App = () => (
     <div className="container">
         <Row>
-            <Col md={8}>
+            <Col md={10}>
                 <PlayList />
             </Col>
-            <Col md={4}>
+            <Col md={2}>
                 <Filters />
             </Col>
         </Row>

@@ -24,7 +24,7 @@ class PlayList extends Component {
         const { items, activePage, size, totalItems } = this.props;
 
         return (
-            <div>
+            <div className="playlist">
                 <Table striped bordered condensed hover>
                     <thead>
                         <tr>
@@ -72,7 +72,7 @@ function mapStateToProps(state) {
         activePage: state.activePage
     };
 }
-  
+
 function mapDispatchToProps(dispatch) {
     return {
         pageActions: bindActionCreators(pageActions, dispatch)
