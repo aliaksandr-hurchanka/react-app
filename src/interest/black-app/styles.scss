@@ -1,0 +1,75 @@
+/* Black App */
+
+$cursorColor:  rgb(17, 109, 63);
+
+.black-app {
+  background-color: #000;
+  height: 100vh;
+  color: $cursorColor;
+  font-family: 'Arial', Courier, monospace;
+  padding: 20px;
+
+  .blinking-cursor {
+    &::after {
+      position: relative;
+      content: '|';
+      padding-left: 2px;
+      // width: 10px;
+      // height: 10px;
+      // background-color: $cursorColor;
+    }
+    font-weight: 900;
+    font-size: 20px;
+    color: $cursorColor;
+    -webkit-animation: 1.5s blink step-end infinite;
+    -moz-animation: 1.5s blink step-end infinite;
+    -ms-animation: 1.5s blink step-end infinite;
+    -o-animation: 1.5s blink step-end infinite;
+    animation: 1.5s blink step-end infinite;
+  }
+
+  @keyframes "blink" {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: $cursorColor;
+    }
+  }
+  
+  @-moz-keyframes blink {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: $cursorColor;
+    }
+  }
+  
+  @-webkit-keyframes "blink" {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: $cursorColor;
+    }
+  }
+  
+  @-ms-keyframes "blink" {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: $cursorColor;
+    }
+  }
+  
+  @-o-keyframes "blink" {
+    from, to {
+      color: transparent;
+    }
+    50% {
+      color: $cursorColor;
+    }
+  }
+}
