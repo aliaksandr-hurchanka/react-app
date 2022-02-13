@@ -29,6 +29,10 @@ module.exports = {
           },
           {
             loader: 'css-loader',
+          },
+          {
+            // Compiles Sass to CSS
+            loader: 'sass-loader',
           }
         ],
       }

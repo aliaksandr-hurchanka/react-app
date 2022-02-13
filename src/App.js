@@ -12,6 +12,7 @@ import {
 import { Home } from './pages/home';
 import { Lazy } from './pages/lazy';
 import { TypeScriptPage } from './pages/typescript';
+import { Row } from './common/grid/row';
 // import './styles.scss';
 
 
@@ -45,9 +46,9 @@ class App extends React.Component {
     }
     render() {
         return (
-            <>
+            <Row>
                 <Menu />
-            </>
+            </Row>
         );
     }
 };
