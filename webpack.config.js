@@ -31,7 +31,8 @@ module.exports = {
             loader: 'css-loader',
           },
           {
-            loader: 'sass-loader'
+            // Compiles Sass to CSS
+            loader: 'sass-loader',
           }
         ],
       }
@@ -42,4 +43,9 @@ module.exports = {
       template: './src/index.html',
     }),
   ],
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './',
+    hot: true
+ },
 };
