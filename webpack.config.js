@@ -29,11 +29,17 @@ module.exports = {
           },
           {
             loader: 'css-loader',
+            options: {
+              modules: {
+                  // localIdentName: '[name]_[local]_[hash:base64:6]',
+                  localIdentName: '[local]-[hash:base64:6]',
+                  exportLocalsConvention: 'camelCase'
+              }
+          }
           },
           {
-            // Compiles Sass to CSS
-            loader: 'sass-loader',
-          }
+            loader: "sass-loader",
+          },
         ],
       }
     ],
